@@ -1,0 +1,226 @@
+<Window x:Class="Ytec.BrowserCapsule.App.RestoreMappingDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="復元先の対応付け"
+        Width="760"
+        Height="720"
+        MinWidth="680"
+        MinHeight="640"
+        KeyboardNavigation.TabNavigation="Cycle"
+        ResizeMode="CanResize"
+        WindowStartupLocation="CenterOwner"
+        Background="#F4F7FB"
+        ShowInTaskbar="False">
+    <Grid Margin="26">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <TextBlock Foreground="#172B4D"
+                       FontSize="23"
+                       FontWeight="SemiBold"
+                       Text="復元元と復元先を確認" />
+            <TextBlock Margin="0,8,0,0"
+                       Foreground="#5F7187"
+                       FontSize="13"
+                       Text="同名でも自動確定しません。ブラウザーごとに、復元先を明示的に選んでください。"
+                       TextWrapping="Wrap" />
+        </StackPanel>
+        <ScrollViewer Grid.Row="1"
+                      Margin="0,20,0,18"
+                      HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <Border Padding="18"
+                        Background="White"
+                        BorderBrush="#DCE4EF"
+                        BorderThickness="1"
+                        CornerRadius="11">
+                    <StackPanel>
+                        <TextBlock Foreground="#26384F"
+                                   FontSize="15"
+                                   FontWeight="SemiBold"
+                                   Text="復元モード" />
+                        <RadioButton x:Name="MigrationRadioButton"
+                                     Margin="0,12,0,0"
+                                     Checked="RestoreMode_Changed"
+                                     Content="別環境移行（安全な既定値）"
+                                     GroupName="RestoreMode" />
+                        <TextBlock Margin="24,4,0,0"
+                                   Foreground="#6B7D91"
+                                   FontSize="11"
+                                   Text="Cookie、セッション、パスキーは保証せず、復元後の再ログインを前提にします。"
+                                   TextWrapping="Wrap" />
+                        <RadioButton x:Name="SameEnvironmentRadioButton"
+                                     Margin="0,12,0,0"
+                                     Checked="RestoreMode_Changed"
+                                     Content="同一環境として復元"
+                                     GroupName="RestoreMode" />
+                        <Border x:Name="EnvironmentWarningBorder"
+                                Margin="0,12,0,0"
+                                Padding="12"
+                                Background="#FFE7E7"
+                                CornerRadius="8"
+                                Visibility="Collapsed">
+                            <StackPanel>
+                                <TextBlock Foreground="#8F2020"
+                                           FontSize="12"
+                                           Text="このバックアップは別のPCまたはWindowsユーザーで作成された可能性があります。"
+                                           TextWrapping="Wrap" />
+                                <CheckBox x:Name="EnvironmentAcknowledgementCheckBox"
+                                          Margin="0,10,0,0"
+                                          Content="環境IDの不一致と端末依存データの非保証を理解しました" />
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
+                <Border Margin="0,14,0,0"
+                        Padding="18"
+                        Background="White"
+                        BorderBrush="#DCE4EF"
+                        BorderThickness="1"
+                        CornerRadius="11">
+                    <StackPanel>
+                        <TextBlock Foreground="#26384F"
+                                   FontSize="15"
+                                   FontWeight="SemiBold"
+                                   Text="プロファイルの対応付け" />
+                        <ItemsControl x:Name="MappingItemsControl"
+                                      Margin="0,12,0,0">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Margin="0,0,0,10"
+                                            Padding="12"
+                                            Background="#F8FAFD"
+                                            BorderBrush="#E1E8F0"
+                                            BorderThickness="1"
+                                            CornerRadius="8">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="28" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <CheckBox Margin="0,0,10,0"
+                                                      VerticalAlignment="Center"
+                                                      AutomationProperties.Name="このバックアップ元を復元する"
+                                                      AutomationProperties.HelpText="{Binding SourceLabel}"
+                                                      IsChecked="{Binding IsIncluded}" />
+                                            <StackPanel Grid.Column="1">
+                                                <TextBlock Foreground="#1F2F46"
+                                                           FontSize="13"
+                                                           FontWeight="SemiBold"
+                                                           Text="{Binding SourceLabel}"
+                                                           TextWrapping="Wrap" />
+                                                <TextBlock Margin="0,3,0,0"
+                                                           Foreground="#74859A"
+                                                           FontSize="11"
+                                                           Text="バックアップ元" />
+                                            </StackPanel>
+                                            <TextBlock Grid.Column="2"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"
+                                                       Foreground="#74859A"
+                                                       FontSize="18"
+                                                       Text="→" />
+                                            <ComboBox Grid.Column="3"
+                                                      MinHeight="36"
+                                                      VerticalAlignment="Center"
+                                                      AutomationProperties.Name="復元先プロファイル"
+                                                      DisplayMemberPath="DisplayLabel"
+                                                      ItemsSource="{Binding Targets}"
+                                                      SelectedItem="{Binding SelectedTarget}" />
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </Border>
+                <Border Margin="0,14,0,0"
+                        Padding="18"
+                        Background="White"
+                        BorderBrush="#DCE4EF"
+                        BorderThickness="1"
+                        CornerRadius="11">
+                    <StackPanel>
+                        <TextBlock Foreground="#26384F"
+                                   FontSize="15"
+                                   FontWeight="SemiBold"
+                                   Text="復元する内容（選択した全プロファイルに適用）" />
+                        <TextBlock Margin="0,5,0,0"
+                                   Foreground="#6B7D91"
+                                   FontSize="11"
+                                   Text="このバックアップにない項目は選べません。"
+                                   TextWrapping="Wrap" />
+                        <WrapPanel Margin="0,12,0,0">
+                            <CheckBox x:Name="SettingsCheckBox"
+                                      Width="180"
+                                      Margin="0,0,12,10"
+                                      Content="ブラウザー設定"
+                                      IsChecked="True" />
+                            <CheckBox x:Name="BookmarksCheckBox"
+                                      Width="180"
+                                      Margin="0,0,12,10"
+                                      Content="ブックマーク"
+                                      IsChecked="True" />
+                            <CheckBox x:Name="HistoryCheckBox"
+                                      Width="180"
+                                      Margin="0,0,12,10"
+                                      Content="履歴"
+                                      IsChecked="True" />
+                            <CheckBox x:Name="ExtensionsCheckBox"
+                                      Width="180"
+                                      Margin="0,0,12,10"
+                                      Content="拡張機能"
+                                      IsChecked="True" />
+                            <CheckBox x:Name="SiteDataCheckBox"
+                                      Width="230"
+                                      Margin="0,0,12,10"
+                                      Content="Cookie／サイトデータ" />
+                            <CheckBox x:Name="SessionsCheckBox"
+                                      Width="180"
+                                      Margin="0,0,12,10"
+                                      Content="セッション" />
+                            <CheckBox x:Name="PasswordCsvCheckBox"
+                                      Width="230"
+                                      Margin="0,0,12,10"
+                                      Content="保存パスワードCSV（公式取込）" />
+                        </WrapPanel>
+                        <Separator Margin="0,2,0,10" />
+                        <CheckBox x:Name="FullProfileCheckBox"
+                                  Checked="FullProfileCheckBox_Changed"
+                                  Content="プロファイル全体（保存パスワードCSVは別選択）"
+                                  Unchecked="FullProfileCheckBox_Changed" />
+                    </StackPanel>
+                </Border>
+                <TextBlock x:Name="ValidationText"
+                           Margin="2,12,2,0"
+                           AutomationProperties.LiveSetting="Assertive"
+                           Foreground="#B42318"
+                           FontSize="12"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+        </ScrollViewer>
+        <StackPanel Grid.Row="2"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+            <Button Width="92"
+                    Height="42"
+                    Margin="0,0,10,0"
+                    Click="CancelButton_Click"
+                    Content="キャンセル"
+                    IsCancel="True"
+                    Style="{StaticResource QuietButtonStyle}" />
+            <Button Width="170"
+                    Height="42"
+                    Click="RestoreButton_Click"
+                    Content="ロールバック後に復元"
+                    IsDefault="True"
+                    Style="{StaticResource PrimaryButtonStyle}" />
+        </StackPanel>
+    </Grid>
+</Window>

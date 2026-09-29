@@ -1,0 +1,24 @@
+name: Feature request / 機能提案
+description: Suggest a safe improvement within the project's security boundary.
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem to solve / 解決したい問題
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior / 提案する動作
+    validations:
+      required: true
+  - type: checkboxes
+    id: boundary
+    attributes:
+      label: Security boundary / セキュリティ境界
+      options:
+        - label: This does not require credential decryption, DPAPI/App-Bound bypass, credential-database parsing, or automated identity confirmation.
+          required: true

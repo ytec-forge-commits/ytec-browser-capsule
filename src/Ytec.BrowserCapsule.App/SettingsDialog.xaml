@@ -1,0 +1,165 @@
+<Window x:Class="Ytec.BrowserCapsule.App.SettingsDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Y-TEC Browser Capsuleの設定"
+        Width="650"
+        Height="600"
+        MinWidth="520"
+        MinHeight="520"
+        KeyboardNavigation.TabNavigation="Cycle"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="CanResize"
+        ShowInTaskbar="False"
+        Background="#F4F7FB">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Border Padding="28,22"
+                Background="#172B4D">
+            <StackPanel>
+                <TextBlock Foreground="White"
+                           FontSize="25"
+                           FontWeight="SemiBold"
+                           Text="設定" />
+                <TextBlock Margin="0,6,0,0"
+                           Foreground="#D4DEEC"
+                           FontSize="13"
+                           Text="バックアップ先と、安全のため固定している動作を確認します。"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+        </Border>
+
+        <ScrollViewer Grid.Row="1"
+                      HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="28,24">
+                <TextBlock Foreground="#26384F"
+                           FontSize="15"
+                           FontWeight="SemiBold"
+                           Text="表示言語" />
+                <TextBlock Margin="0,6,0,0"
+                           Foreground="#64748B"
+                           FontSize="12"
+                           Text="言語の変更はアプリを再起動すると反映されます。"
+                           TextWrapping="Wrap" />
+                <ComboBox x:Name="LanguageComboBox"
+                          Margin="0,12,0,0"
+                          MinHeight="38"
+                          Padding="9,5"
+                          AutomationProperties.Name="表示言語"
+                          SelectedValuePath="Tag">
+                    <ComboBoxItem Content="Windowsの表示言語（推奨）"
+                                  Tag="SystemDefault" />
+                    <ComboBoxItem Content="日本語"
+                                  Tag="Japanese" />
+                    <ComboBoxItem Content="English"
+                                  Tag="English" />
+                </ComboBox>
+
+                <TextBlock Margin="0,24,0,0"
+                           Foreground="#26384F"
+                           FontSize="15"
+                           FontWeight="SemiBold"
+                           Text="既定のバックアップ先" />
+                <TextBlock Margin="0,6,0,0"
+                           Foreground="#64748B"
+                           FontSize="12"
+                           Text="未指定の場合は、保存時に前回の場所またはWindowsの既定場所を表示します。ネットワーク先は設定できません。"
+                           TextWrapping="Wrap" />
+                <Grid Margin="0,12,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="DefaultBackupDirectoryTextBox"
+                             MinHeight="38"
+                             Padding="9,7"
+                             VerticalContentAlignment="Center"
+                             AutomationProperties.Name="既定のバックアップ先"
+                             IsReadOnly="True"
+                             TextWrapping="NoWrap" />
+                    <Button Grid.Column="1"
+                            Margin="9,0,0,0"
+                            AutomationProperties.Name="既定のバックアップ先を選ぶ"
+                            Click="ChooseDirectoryButton_Click"
+                            Content="選ぶ"
+                            Style="{StaticResource QuietButtonStyle}" />
+                </Grid>
+                <Button Margin="0,8,0,0"
+                        HorizontalAlignment="Left"
+                        AutomationProperties.Name="既定のバックアップ先を未指定に戻す"
+                        Click="ResetDirectoryButton_Click"
+                        Content="未指定に戻す"
+                        Style="{StaticResource QuietButtonStyle}" />
+
+                <TextBlock Margin="0,24,0,0"
+                           Foreground="#26384F"
+                           FontSize="15"
+                           FontWeight="SemiBold"
+                           Text="安全のため固定している動作" />
+                <Border Margin="0,10,0,0"
+                        Padding="18"
+                        Background="White"
+                        BorderBrush="#DCE4EF"
+                        BorderThickness="1"
+                        CornerRadius="11">
+                    <StackPanel>
+                        <CheckBox AutomationProperties.Name="作成後に完全検証"
+                                  Content="作成後に完全検証"
+                                  IsChecked="True"
+                                  IsEnabled="False" />
+                        <CheckBox Margin="0,10,0,0"
+                                  AutomationProperties.Name="キャッシュを除外"
+                                  Content="キャッシュを除外"
+                                  IsChecked="True"
+                                  IsEnabled="False" />
+                        <CheckBox Margin="0,10,0,0"
+                                  AutomationProperties.Name="古いCSV一時領域を起動時に清掃"
+                                  Content="古いCSV一時領域を起動時に清掃"
+                                  IsChecked="True"
+                                  IsEnabled="False" />
+                        <CheckBox Margin="0,10,0,0"
+                                  AutomationProperties.Name="プロファイルのフルパスを画面に表示しない"
+                                  Content="プロファイルのフルパスを画面に表示しない"
+                                  IsChecked="True"
+                                  IsEnabled="False" />
+                    </StackPanel>
+                </Border>
+
+                <TextBlock x:Name="ValidationText"
+                           Margin="0,14,0,0"
+                           AutomationProperties.LiveSetting="Assertive"
+                           Foreground="#A33131"
+                           FontSize="12"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+        </ScrollViewer>
+
+        <Border Grid.Row="2"
+                Padding="20,14"
+                Background="White"
+                BorderBrush="#DCE4EF"
+                BorderThickness="0,1,0,0">
+            <StackPanel HorizontalAlignment="Right"
+                        Orientation="Horizontal">
+                <Button Width="100"
+                        Margin="0,0,10,0"
+                        AutomationProperties.Name="設定を保存せず閉じる"
+                        Click="CancelButton_Click"
+                        Content="キャンセル"
+                        IsCancel="True"
+                        Style="{StaticResource QuietButtonStyle}" />
+                <Button Width="110"
+                        AutomationProperties.Name="設定を保存"
+                        Click="SaveButton_Click"
+                        Content="保存"
+                        IsDefault="True"
+                        Style="{StaticResource PrimaryButtonStyle}" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

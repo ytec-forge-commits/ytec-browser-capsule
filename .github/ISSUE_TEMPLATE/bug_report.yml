@@ -1,0 +1,42 @@
+name: Bug report / 不具合報告
+description: Report a reproducible problem without including private browser data.
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        復元キー、バックアップ、保存パスワードCSV、認証情報、実プロファイルパス、個人情報を投稿しないでください。
+  - type: input
+    id: version
+    attributes:
+      label: App version / アプリ版
+      placeholder: 1.2.1
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Windows and browser / Windows・ブラウザー
+      placeholder: Windows 11 64-bit, Chrome Stable
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction with synthetic data / 合成データでの再現手順
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected and actual behavior / 期待結果と実際の結果
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety confirmation / 安全確認
+      options:
+        - label: I removed recovery keys, credentials, personal data, and real profile paths.
+          required: true

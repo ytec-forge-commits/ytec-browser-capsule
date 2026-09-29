@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ytec.BrowserCapsule.Application\Ytec.BrowserCapsule.Application.csproj" />
+    <ProjectReference Include="..\Ytec.BrowserCapsule.Infrastructure\Ytec.BrowserCapsule.Infrastructure.csproj" />
+    <ProjectReference Include="..\Ytec.BrowserCapsule.Browsers.Chrome\Ytec.BrowserCapsule.Browsers.Chrome.csproj" />
+    <ProjectReference Include="..\Ytec.BrowserCapsule.Browsers.Edge\Ytec.BrowserCapsule.Browsers.Edge.csproj" />
+    <ProjectReference Include="..\Ytec.BrowserCapsule.Browsers.Firefox\Ytec.BrowserCapsule.Browsers.Firefox.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Assets\YtecBrowserCapsule.ico</ApplicationIcon>
+    <AssemblyName>YtecBrowserCapsule</AssemblyName>
+    <RootNamespace>Ytec.BrowserCapsule.App</RootNamespace>
+    <Product>Y-TEC Browser Capsule</Product>
+    <AssemblyTitle>Y-TEC Browser Capsule</AssemblyTitle>
+    <Description>A local Windows app for safely backing up and moving Chrome, Edge, and Firefox profiles</Description>
+    <Version>1.2.1</Version>
+    <AssemblyVersion>1.2.1.0</AssemblyVersion>
+    <FileVersion>1.2.1.0</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\YtecBrowserCapsule.ico" />
+    <Content Include="..\..\output\pdf\Y-TEC_Browser_Capsule_操作マニュアル_1.2.1.pdf">
+      <Link>操作マニュアル.pdf</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="..\..\output\pdf\Y-TEC_Browser_Capsule_User_Manual_1.2.1.pdf">
+      <Link>Operation Manual.pdf</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>

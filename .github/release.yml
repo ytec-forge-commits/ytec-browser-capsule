@@ -1,0 +1,22 @@
+changelog:
+  exclude:
+    labels:
+      - ignore-for-release
+  categories:
+    - title: Security / セキュリティ
+      labels:
+        - security
+    - title: Features / 機能
+      labels:
+        - feature
+        - enhancement
+    - title: Fixes / 修正
+      labels:
+        - bug
+    - title: Documentation and maintenance / 文書・保守
+      labels:
+        - documentation
+        - maintenance
+    - title: Other changes / その他
+      labels:
+        - "*"

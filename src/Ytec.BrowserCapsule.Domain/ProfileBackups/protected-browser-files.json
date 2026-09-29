@@ -1,0 +1,10 @@
+{
+  "Chromium": [
+    "Login Data",
+    "Login Data For Account"
+  ],
+  "Firefox": [
+    "key4.db",
+    "logins.json"
+  ]
+}
