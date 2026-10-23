@@ -12,18 +12,17 @@
 
 | パッケージ | バージョン | ライセンス | 用途 |
 | --- | --- | --- | --- |
-| Microsoft.NET.Test.Sdk | 17.14.1 | MIT | `dotnet test`とテストホスト |
+| Microsoft.NET.Test.Sdk | 18.11.0 | MIT | `dotnet test`とテストホスト |
 | xunit | 2.9.3 | Apache-2.0 | テスト記述とアサーション |
-| xunit.runner.visualstudio | 3.1.4 | Apache-2.0 | VSTestからxUnitテストを検出・実行 |
+| xunit.runner.visualstudio | 4.0.1 | Apache-2.0 | VSTestからxUnitテストを検出・実行 |
 
-2026-07-24に復元結果のNuSpecを確認した推移的依存は次のとおりです。すべて開発・CI専用です。
+2026-10-24に復元結果とNuSpecを確認した推移的依存は次のとおりです。すべて開発・CI専用です。
 
 | 推移的パッケージ | バージョン | ライセンス |
 | --- | --- | --- |
-| Microsoft.CodeCoverage | 17.14.1 | MIT |
-| Microsoft.TestPlatform.ObjectModel | 17.14.1 | MIT |
-| Microsoft.TestPlatform.TestHost | 17.14.1 | MIT |
-| Newtonsoft.Json | 13.0.3 | MIT |
+| Microsoft.CodeCoverage | 18.11.0 | MIT |
+| Microsoft.TestPlatform.ObjectModel | 18.11.0 | MIT |
+| Microsoft.TestPlatform.TestHost | 18.11.0 | MIT |
 | xunit.abstractions | 2.0.3 | Apache-2.0（NuSpecはプロジェクトのライセンスURLを参照） |
 | xunit.analyzers | 1.18.0 | Apache-2.0 |
 | xunit.assert | 2.9.3 | Apache-2.0 |
