@@ -46,4 +46,4 @@ jobs:
           dotnet build YtecBrowserCapsule.sln --configuration Release --no-restore
 
       - name: CodeQLを解析
-        uses: github/codeql-action/analyze@4c0873ef8656cb3c50b3f42fb63bc1ade0cfa827 # v4
+        uses: github/codeql-action/analyze@592d162ba3b2f5a3411d2cbf01df9f82c492f269 # v4
